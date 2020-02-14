@@ -13,7 +13,7 @@ from detectron2.structures import BoxMode
 class DummyAlbuMapper:
     """
     To use albumentations:
-    1. Create serialized json file with augmentation config.
+    1. Create serialized json file with augmentation config. See "sample-detection-albu-config.json"
     2. Define cfg.INPUT.ALBUMENTATIONS variable in detectron config file.
     """
     

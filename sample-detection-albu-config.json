@@ -1,0 +1,110 @@
+{
+    "__version__": "0.3.2",
+    "transform": {
+        "__class_fullname__": "albumentations.core.composition.Compose",
+        "p": 1.0,
+        "transforms": [
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.HorizontalFlip",
+                "always_apply": false,
+                "p": 0.5
+            },
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.VerticalFlip",
+                "always_apply": false,
+                "p": 0.5
+            },
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.RGBShift",
+                "always_apply": false,
+                "p": 0.5,
+                "r_shift_limit": [
+                    -20,
+                    20
+                ],
+                "g_shift_limit": [
+                    -20,
+                    20
+                ],
+                "b_shift_limit": [
+                    -20,
+                    20
+                ]
+            },
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.RandomBrightnessContrast",
+                "always_apply": false,
+                "p": 0.5,
+                "brightness_limit": [
+                    -0.2,
+                    0.2
+                ],
+                "contrast_limit": [
+                    -0.2,
+                    0.2
+                ]
+            },
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.ShiftScaleRotate",
+                "always_apply": false,
+                "p": 1.0,
+                "shift_limit": [
+                    -0.0625,
+                    0.0625
+                ],
+                "scale_limit": [
+                    -0.09999999999999998,
+                    0.10000000000000009
+                ],
+                "rotate_limit": [
+                    -10,
+                    10
+                ],
+                "interpolation": 1,
+                "border_mode": 4,
+                "value": null,
+                "mask_value": null
+            },
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.CLAHE",
+                "always_apply": false,
+                "p": 0.5,
+                "clip_limit": [
+                    1,
+                    4.0
+                ],
+                "tile_grid_size": [
+                    8,
+                    8
+                ]
+            },
+            {
+                "__class_fullname__": "albumentations.augmentations.transforms.HueSaturationValue",
+                "always_apply": false,
+                "p": 1.0,
+                "hue_shift_limit": [
+                    -20,
+                    20
+                ],
+                "sat_shift_limit": [
+                    -30,
+                    30
+                ],
+                "val_shift_limit": [
+                    -20,
+                    20
+                ]
+            }
+        ],
+        "bbox_params": {
+            "format": "coco",
+            "label_fields": [
+                "category_id"
+            ],
+            "min_area": 0.0,
+            "min_visibility": 0.3
+        },
+        "keypoint_params": null,
+        "additional_targets": {}
+    }
+}
