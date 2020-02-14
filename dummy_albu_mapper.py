@@ -62,11 +62,10 @@ class DummyAlbuMapper:
             for i in range(len(augm_boxes))
         ]
         
-        img_shape = img.shape[:2]
         if self.crop_gen:
             # кроп картинки средствами детектрона
             crop_tfm = utils.gen_crop_transform_with_instance(
-                self.crop_gen.get_crop_size(img_shape),
+                self.crop_gen.get_crop_size(img.shape[:2]),
                 img.shape[:2],
                 np.random.choice(dataset_dict["annotations"])
             )
@@ -85,7 +84,7 @@ class DummyAlbuMapper:
         ]
         dataset_dict['annotations'] = annos
         instances = utils.annotations_to_instances(
-            annos, img_shape
+            annos, img.shape[:2]
         )
         dataset_dict["instances"] = utils.filter_empty_instances(instances)
 
