@@ -67,7 +67,7 @@ class DummyAlbuMapper:
             # кроп картинки средствами детектрона
             crop_tfm = utils.gen_crop_transform_with_instance(
                 self.crop_gen.get_crop_size(img_shape),
-                img_shape,
+                img.shape[:2],
                 np.random.choice(dataset_dict["annotations"])
             )
             img = crop_tfm.apply_image(img)
@@ -76,13 +76,9 @@ class DummyAlbuMapper:
         img, transforms = T.apply_transform_gens(self.resize_gen, img)
         if self.crop_gen:
             transforms = crop_tfm + transforms
-
-        dataset_dict['height'] = img_shape[0]
-        dataset_dict['width'] = img_shape[1]
-
         annos = [
             utils.transform_instance_annotations(
-                obj, transforms, img_shape
+                obj, transforms, img.shape[:2]
             )
             for obj in dataset_dict.pop("annotations")
             if obj.get("iscrowd", 0) == 0
@@ -93,10 +89,11 @@ class DummyAlbuMapper:
         )
         dataset_dict["instances"] = utils.filter_empty_instances(instances)
 
+        dataset_dict['height'] = img.shape[0]
+        dataset_dict['width'] = img.shape[1]
+
         dataset_dict["image"] = torch.as_tensor(
             img.transpose(2, 0, 1).astype("float32")
         ).contiguous()
-
-        dataset_dict["instances"] = utils.filter_empty_instances(dataset_dict['instances'])
 
         return dataset_dict
